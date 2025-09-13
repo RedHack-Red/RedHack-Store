@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر إلكتروني - تحميل المنتجات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #991212 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #FFD700, #FF6347, #FF4500);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 99, 71, 0.3);
+            border: none;
+            cursor: pointer;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(45deg, #FF6347, #FF4500, #DC143C);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 99, 71, 0.5);
+        }
+
+        .download-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(108, 117, 125, 0.1);
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .product-card {
+                padding: 20px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RedHack</h1>
+            <p>متجر RedHack رهيب جدا </p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://media.discordapp.net/attachments/1390183472500576266/1390183764285460490/2024-11-29_193808.webp?ex=68c64105&is=68c4ef85&hm=199a96184b0061420d1324f33079cd43cf45bd38b8da32c722f97ed13c498e12&=&format=webp" 
+                     alt="منتج رقمي" 
+                     class="product-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display: none; padding: 20px; background: #f8f9fa; border-radius: 10px; color: #666;">
+                    🖼️ صورة المنتج
+                </div>
+                
+                <h2 class="product-title">crab game</h2>
+                
+                <p class="product-description">
+                    هكر بلعبه
+                    crab game
+                </p>
+
+                <div class="stats">
+                    <div class="stat">
+                    </div>
+                    <div class="stat">
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">مجاني</div>
+                        <div class="stat-label">السعر</div>
+                    </div>
+                </div>
+
+                <a href="https://cdn.discordapp.com/attachments/1390183472500576266/1411143165347627018/RedHack.rar?ex=68c609fc&is=68c4b87c&hm=83613f917494692a71adb8558b2041494e6e902d47345179c4454fb2b4bd952e&" 
+                   class="download-btn" 
+                   target="_blank">
+                    <svg class="download-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414L10 14.414 6.293 10.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    تحميل المنتج
+                </a>
+            </div>
+
+            <!-- يمكنك إضافة منتجات أخرى هنا -->
+            <div class="product-card">
+                <div style="padding: 40px; background: linear-gradient(45deg, #f8f9fa, #e9ecef); border-radius: 15px; color: #666; margin-bottom: 20px;">
+                    <svg width="60" height="60" fill="currentColor" viewBox="0 0 20 20" style="margin-bottom: 10px;">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+                    </svg>
+                    <p>منتج قادم قريباً</p>
+                </div>
+                
+                <h2 class="product-title">منتج جديد</h2>
+                
+                <p class="product-description">
+                    قريباً
+                    انشاء الله
+                </p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">قريباً</div>
+                        <div class="stat-label">الإطلاق</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">جديد</div>
+                        <div class="stat-label">الحالة</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">-</div>
+                        <div class="stat-label">السعر</div>
+                    </div>
+                </div>
+
+                <button class="download-btn" style="background: #6c757d; cursor: not-allowed;" disabled>
+                    <svg class="download-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-11a1 1 0 112 0v3.586L13.293 8.293a1 1 0 111.414 1.414L10 14.414 5.293 9.707a1 1 0 111.414-1.414L9 10.586V7z" clip-rule="evenodd"></path>
+                    </svg>
+                    قريباً
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>https://discord.gg/t9nqjhHpYu</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">للحصول على أفضل تجربة، استخدم متصفح حديث</p>
+        </div>
+    </div>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // تأثير النقر على زر التحميل
+        document.querySelectorAll('.download-btn:not([disabled])').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // إضافة تأثير النقر
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // رسالة ترحيب
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                console.log('🎉 مرحباً بك في RedHack!');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
